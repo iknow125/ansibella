@@ -1,0 +1,23 @@
+- name: Install common packages
+  ansible.builtin.package:
+    name:
+      - nfs-kernel-server
+
+- name: change ownership of of shared folder
+  ansible.builtin.file:
+    path: "{{ item }}"
+    owner: nobody
+    group: nogroup
+    mode: '0777'
+    state: directory
+  loop: "{{ share_folders }}"
+
+- name: add exports file for nfs
+  ansible.builtin.template:
+    src:    exports.j2
+    dest:   "/etc/exports"
+    owner:  root
+    group:  root
+  notify:
+    - reload exportfs
+    - reload nfs-kernel-server

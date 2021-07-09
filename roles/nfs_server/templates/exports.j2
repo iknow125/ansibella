@@ -1,0 +1,14 @@
+#
+#       This file is managed by Ansible. manual editing will be undone.
+#
+# /etc/exports: the access control list for filesystems which may be exported
+#		to NFS clients.  See exports(5).
+#
+# Example for NFSv2 and NFSv3:
+# /srv/homes       hostname1(rw,sync,no_subtree_check) hostname2(ro,sync,no_subtree_check)
+
+{% for share_folder in share_folders %}
+{% for ip in ip_list %}
+{{ share_folder }}  {{ ip }}(rw,sync,no_subtree_check)
+{% endfor %}
+{% endfor %}
