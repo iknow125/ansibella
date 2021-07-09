@@ -1,0 +1,30 @@
+- name: Ensure user group exists
+  ansible.builtin.group:
+    name: ernestovogel
+    state: present
+
+- name: create login users
+  ansible.builtin.user:
+    name: ernestovogel
+    group: ernestovogel
+    groups: adm,cdrom,sudo,plugdev,lxd
+    shell: /bin/bash
+    append: yes
+    password: "{{ ssh_password | password_hash('sha512') }}"
+
+- name: Adding ssh key
+  ansible.posix.authorized_key:
+    user: ernestovogel
+    key: "{{ ssh_public_key }}"
+
+- name: Install common packages
+  ansible.builtin.package:
+    name:
+      - nfs-common
+      - locate
+      - apt-transport-https 
+      - gnupg2 
+      - curl
+
+
+
