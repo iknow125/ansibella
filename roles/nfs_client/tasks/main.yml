@@ -1,0 +1,15 @@
+- name: Add nfs mount video
+  ansible.posix.mount:
+    boot: yes
+    state: mounted
+    fstype: nfs
+    path: /mnt/video
+    src: 192.168.1.1:/mnt/sda1/Videos
+
+- name: Add nfs mount nextcloud
+  ansible.posix.mount:
+    boot: yes
+    state: mounted
+    fstype: nfs
+    path: /mnt/nextcloud
+    src: 192.168.1.1:/mnt/sda1/Nextcloud
