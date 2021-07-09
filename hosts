@@ -1,0 +1,10 @@
+[common]
+komodo
+java
+
+[nfs_server]
+komodo
+
+[nfs_client]
+java
+komodo
