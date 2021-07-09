@@ -1,0 +1,17 @@
+- name: running common server setup
+  hosts: all
+  remote_user: root
+  roles:
+    - common
+
+- name: running nfs-server setup
+  hosts: nfs_server
+  remote_user: root
+  roles:
+    - nfs_server
+
+- name: running nfs-client setup
+  hosts: nfs_client
+  remote_user: root
+  roles:
+    - nfs_client
