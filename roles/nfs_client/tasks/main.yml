@@ -13,3 +13,11 @@
     fstype: nfs
     path: /mnt/nextcloud
     src: 192.168.1.1:/mnt/sda1/Nextcloud
+
+- name: change ownership of nextcloud
+  ansible.builtin.file:
+    path: "/mnt/nextcloud"
+    owner: www-data
+    recurse: yes
+    mode: '0770'
+    state: directory
